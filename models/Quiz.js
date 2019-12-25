@@ -4,9 +4,9 @@ const quizSchema = mongoose.Schema(
   {
     title: { type: String, required: true },
     subject: { type: String, required: true },
-    duration: { type: String, required: true },
+    duration: { type: Number, required: true }, // in minutes
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    code: { tyoe: String },
+    code: { type: String },
     marks: { type: Number },
     questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }]
   },

@@ -6,6 +6,6 @@ const { createQuestion, getQuestions, createQuiz } = require("../../../controlle
 
 router.post("/add-question", teacherAuth, createQuestion);
 router.get("/questions", teacherAuth, getQuestions);
-router.get("/create-quiz", teacherAuth, createQuiz);
+router.post("/create-quiz", teacherAuth, createQuiz);
 
 module.exports = router;
