@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 const { teacherAuth } = require("../../../middlewares/auth");
-const { createQuestion } = require("../../../controllers/quiz_controller");
+const { createQuestion, getQuestions, createQuiz } = require("../../../controllers/quiz_controller");
 
-router.get("/add-question", teacherAuth, createQuestion);
+router.post("/add-question", teacherAuth, createQuestion);
+router.get("/questions", teacherAuth, getQuestions);
+router.get("/create-quiz", teacherAuth, createQuiz);
 
 module.exports = router;
