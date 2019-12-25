@@ -64,3 +64,40 @@ module.exports.createQuiz = async (req, res) => {
       .json({ message: err.message, error: true, data: null });
   }
 };
+
+module.exports.getQuiz = async (req, res) => {
+  let code = `ILLUMNUS-${req.params.code}`;
+  try {
+    let quiz = await Quiz.findOne(
+      { code: code },
+      {
+        marks: 1,
+        questions: 1,
+        title: 1,
+        subject: 1,
+        duration: 1,
+        code: 1
+      }
+    );
+    if (quiz) {
+      let { marks, title, subject, code, duration } = quiz;
+      let questions = await Question.find(
+        { _id: { $in: quiz.questions } },
+        { question: 1, options: 1, marks: 1 }
+      ); // quiz questions
+
+      quiz = { title, subject, questions, marks, duration };
+
+      return res
+        .status(200)
+        .json({ message: "quiz found", error: false, data: { quiz, comment: "duration is in minutes" } });
+    } else
+      return res
+        .status(404)
+        .json({ message: "no quiz", error: true, data: null });
+  } catch (err) {
+    return res
+      .status(200)
+      .json({ message: err.message, error: true, data: null });
+  }
+};
