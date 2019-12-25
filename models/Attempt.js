@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const attemptSchema = mongoose.Schema(
   {
-    score: { type: Number, required: true },
-    tike_taken: { type: String, required: true },
+    code: String,
+    score: { type: Number },
+    tike_taken: { type: String },
     // attempted_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     attemptBy: { name: String, email: String },
-    quiz: [{ type: mongoose.Schema.Types.ObjectId, ref: "Quiz" }]
+    // quiz: [{ type: mongoose.Schema.Types.ObjectId, ref: "Quiz" }]
   },
   {
     timestamps: true

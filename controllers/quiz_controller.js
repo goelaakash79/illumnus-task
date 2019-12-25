@@ -88,13 +88,64 @@ module.exports.getQuiz = async (req, res) => {
 
       quiz = { title, subject, questions, marks, duration };
 
-      return res
-        .status(200)
-        .json({ message: "quiz found", error: false, data: { quiz, comment: "duration is in minutes" } });
+      return res.status(200).json({
+        message: "quiz found",
+        error: false,
+        data: { quiz, comment: "duration is in minutes" }
+      });
     } else
       return res
         .status(404)
         .json({ message: "no quiz", error: true, data: null });
+  } catch (err) {
+    return res
+      .status(200)
+      .json({ message: err.message, error: true, data: null });
+  }
+};
+
+module.exports.startQuiz = async (req, res) => {
+  let { name, email } = req.body;
+  let code = `ILLUMNUS-${req.params.code}`;
+
+  try {
+    let attempt = new Attempt({
+      code,
+      attemptBy: { name, email }
+    });
+    await Attempt.create(attempt);
+    return res.status(200).json({
+      message: "quiz started",
+      error: false,
+      data: {
+        quiz_api: `http://localhost:3000/api/v1/quiz/${req.params.code}`,
+        method: "GET"
+      }
+    });
+  } catch (err) {
+    return res
+      .status(200)
+      .json({ message: err.message, error: true, data: null });
+  }
+};
+
+module.exports.attemptQuiz = async (req, res) => {
+  let { name, email, time_taken, score } = req.body;
+  let code = `ILLUMNUS-${req.params.code}`;
+
+  try {
+    let attempt = new Attempt({
+      code,
+      attemptBy: { name, email },
+      score,
+      time_taken
+    });
+    await Attempt.create(attempt);
+    return res.status(200).json({
+      message: "quiz attempted",
+      error: false,
+      data: { attempt }
+    });
   } catch (err) {
     return res
       .status(200)
