@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CandidateForm = () => {
   return (
@@ -60,7 +61,7 @@ const CandidateForm = () => {
               ></input>
             </div>
             <div className="col-12">
-              <button className="btn btn-primary">Start Quiz</button>
+              <Link to="/quiz" className="btn btn-primary">Start the quiz</Link>
             </div>
           </div>
         </div>

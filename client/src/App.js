@@ -6,6 +6,7 @@ import "./App.css";
 import Home from "./components/Home";
 import CodeForm from "./components/Quiz/CodeForm";
 import CandidateForm from "./components/Quiz/CandidateForm";
+import Quiz from "./components/Quiz/Quiz";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/enter-quiz-code" component={CodeForm} />
         <Route exact path="/candidate-details" component={CandidateForm} />
+        <Route exact path="/quiz" component={Quiz} />
       </Switch>
     </Router>
   );
