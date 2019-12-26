@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="fluid-container">
       <div className="container mt-5">
-        <h4>illumnus | Quiz Portal Task</h4>
+        <h4>illumnus | Quiz Portal Task <Link to="/login" style={{float:'right'}} className="btn btn-primary">Teacher Login</Link></h4>
         <hr />
 
         <div className="jumbotron header mt-4">
