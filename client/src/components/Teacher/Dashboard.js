@@ -9,10 +9,10 @@ const Dashboard = () => {
         <hr />
 
         <h5 className="mb-5">
-          Dashboard{" "}
-          <button className="btn btn-danger" style={{ float: "right" }}>
+          Dashboard
+          <Link to="/login" className="btn btn-danger" style={{ float: "right" }}>
             Logout
-          </button>
+          </Link>
         </h5>
         <div className="row">
           <div className="col-md-6">

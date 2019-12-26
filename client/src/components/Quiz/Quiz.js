@@ -72,7 +72,7 @@ const Quiz = () => {
             <input type="radio" /> Option 4
           </div>
 
-          <button className="btn btn-primary btn-lg">Submit Quiz</button>
+          <button className="btn btn-primary">Submit Quiz</button>
         </div>
       </div>
     </div>

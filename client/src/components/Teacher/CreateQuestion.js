@@ -15,28 +15,28 @@ const CreateQuestion = () => {
             className="form-control mb-4"
           />
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-3 col-6">
               <input
                 placeholder="enter option 1"
                 name="option1"
                 className="form-control mb-4"
               />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 col-6">
               <input
                 placeholder="enter option 2"
                 name="option2"
                 className="form-control mb-4"
               />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 col-6">
               <input
                 placeholder="enter option 3"
                 name="option3"
                 className="form-control mb-4"
               />
             </div>
-            <div className="col-md-3">
+            <div className="col-md-3 col-6">
               <input
                 placeholder="enter option 4"
                 name="option4"

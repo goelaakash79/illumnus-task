@@ -35,25 +35,29 @@ const CreateQuiz = () => {
           <label>Choose questions for the quiz</label>
           <div className="questions-section mb-4">
             <table className="table ">
-              <tr>
-                <th>Pick</th>
-                <th>Question</th>
-                <th>Marks</th>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox"></input>
-                </td>
-                <td>This is a nice question?</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox"></input>
-                </td>
-                <td>This is a nice question?</td>
-                <td>5</td>
-              </tr>
+              <thead>
+                <tr>
+                  <th>Pick</th>
+                  <th>Question</th>
+                  <th>Marks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox"></input>
+                  </td>
+                  <td>This is a nice question?</td>
+                  <td>5</td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox"></input>
+                  </td>
+                  <td>This is a nice question?</td>
+                  <td>5</td>
+                </tr>
+              </tbody>
             </table>
             {/* <input type="checkbox"></input> <i>Question</i>- This is a beautiful
             question? <br/>
