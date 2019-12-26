@@ -1,16 +1,21 @@
-import React from 'react';
-// import { Route, Switch, Redirect } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "./assets/stylesheets/style.css";
-import './App.css';
+import "./App.css";
 
 import Home from "./components/Home";
+import CodeForm from "./components/Quiz/CodeForm";
+import CandidateForm from "./components/Quiz/CandidateForm";
 
 function App() {
   return (
-    <div className="App">
-      <Home/>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/enter-quiz-code" component={CodeForm} />
+        <Route exact path="/candidate-details" component={CandidateForm} />
+      </Switch>
+    </Router>
   );
 }
 

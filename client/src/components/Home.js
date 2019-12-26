@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -21,7 +22,7 @@ const Home = () => {
               Just enter the unique code to enter the quiz. Afterwards, enter
               your email and name to get started with the quiz.
             </p>
-            <button className="btn btn-primary mb-5">Attempt Quiz</button>
+            <Link to="/enter-quiz-code" className="btn btn-primary mb-5">Attempt Quiz</Link>
             <hr/>
             <p>Submitted by<br></br>Aakash Goel - goelaakash79@gmail.com</p>
           </div>
