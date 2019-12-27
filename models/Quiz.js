@@ -6,8 +6,8 @@ const quizSchema = mongoose.Schema(
     subject: { type: String, required: true },
     duration: { type: Number, required: true }, // in minutes
     created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    code: { type: String },
-    marks: { type: Number },
+    code: { type: String }, // auto-generated
+    marks: { type: Number }, // auto-calculated
     questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }]
   },
   {
