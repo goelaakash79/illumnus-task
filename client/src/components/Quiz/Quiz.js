@@ -122,10 +122,10 @@ class Quiz extends Component {
               <div className="card duration-meter p-4">
                 {/* quiz.duration * 60000 */}
                 <Timer
-                  initialTime={0.2 * 60000}
+                  initialTime={quiz.duration * 60000}
                   checkpoints={[
                     {
-                      time: 0.075 * 60000,
+                      time: quiz.duration * 59999,
                       callback: () => console.log("Quiz Started")
                     },
                     {

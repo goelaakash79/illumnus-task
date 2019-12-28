@@ -13,6 +13,7 @@ import Login from "./components/Teacher/Login";
 import Dashboard from "./components/Teacher/Dashboard";
 import CreateQuestion from "./components/Teacher/CreateQuestion";
 import CreateQuiz from "./components/Teacher/CreateQuiz";
+import AvailableQuiz from "./components/Teacher/AvailableQuiz";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/create-question" component={CreateQuestion} />
         <Route exact path="/create-quiz" component={CreateQuiz} />
+        <Route exact path="/quizzes" component={AvailableQuiz} />
+
       </Switch>
     </Router>
   );

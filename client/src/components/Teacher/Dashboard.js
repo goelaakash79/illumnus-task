@@ -73,15 +73,17 @@ class Dashboard extends Component {
                 className="about-illumnus jumbotron p-4"
                 style={{ backgroundColor: "#F4BC05" }}
               >
-                <h4 style={{ color: "#ffffff", fontWeight: 500 }}>iTrack</h4>
+                <h4 style={{ color: "#ffffff", fontWeight: 500 }}>iQLibrary</h4>
 
                 <p className="mt-2">
-                  Track the progress and results of the quizzes attempted by
-                  your students, and analyse their performance.
+                  Check the list of available quizzes created by experts in the industry and assign the codes to the students.
+                  {/* Track the progress and results of the quizzes attempted by
+                  your students, and analyse their performance. */}
                 </p>
 
-                <Link to="#" className="mr-2 btn btn-primary">
-                  Check Results
+                <Link to="/quizzes" className="mr-2 btn btn-primary">
+                  See Quizzes
+                  {/* Check Results */}
                 </Link>
               </div>
             </div>
