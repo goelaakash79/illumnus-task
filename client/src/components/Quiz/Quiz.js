@@ -7,7 +7,7 @@ import baseurl from "../../config";
 
 class Quiz extends Component {
   state = {
-    time_taken: 0,
+    time_taken: this.props.location.state.data.quiz.duration,
     score: 0,
     name: this.props.location.state.data.name,
     email: this.props.location.state.data.email,

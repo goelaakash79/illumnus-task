@@ -22,7 +22,7 @@ class Attempts extends Component {
     };
     if (token) {
       axios
-        .get(`${baseurl}attempts`, auth)
+        .get(`${baseurl}quiz/attempts`, auth)
         .then(({ data }) => {
           this.setState({ attempts: data.data });
         })
@@ -53,8 +53,8 @@ class Attempts extends Component {
                   return (
                     <tr key={i}>
                       <td>{++i}</td>
-                      <td>{attempt.name}</td>
-                      <td>{attempt.email}</td>
+                      <td>{attempt.attemptBy.name}</td>
+                      <td>{attempt.attemptBy.email}</td>
                       <td>{attempt.code}</td>
                       <td>{attempt.time_taken}</td>
                       <td>{attempt.score}</td>

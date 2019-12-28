@@ -161,7 +161,7 @@ module.exports.attemptQuiz = async (req, res) => {
     });
   } catch (err) {
     return res
-      .status(200)
+      .status(401)
       .json({ message: err.message, error: true, data: null });
   }
 };
@@ -169,6 +169,7 @@ module.exports.attemptQuiz = async (req, res) => {
 module.exports.getAttempts = async (req, res) => {
   try {
     let attempts = await Attempt.find({});
+    console.log(attempts)
     return res.status(200).json({
       message: "success",
       error: false,
@@ -176,7 +177,7 @@ module.exports.getAttempts = async (req, res) => {
     });
   } catch (err) {
     return res
-      .status(200)
+      .status(401)
       .json({ message: err.message, error: true, data: null });
   }
 };

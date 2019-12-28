@@ -32,7 +32,6 @@ function App() {
         <Route exact path="/create-quiz" component={CreateQuiz} />
         <Route exact path="/quizzes" component={AvailableQuiz} />
         <Route exact path="/attempts" component={Attempts} />
-
       </Switch>
     </Router>
   );

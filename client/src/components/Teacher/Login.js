@@ -4,6 +4,7 @@ import logo from "../../assets/images/logo.png";
 import axios from "axios";
 import cookie from "react-cookies";
 import baseurl from "../../config";
+import swal from "sweetalert";
 
 class Login extends Component {
   state = {
@@ -23,11 +24,15 @@ class Login extends Component {
       .post(`${baseurl}users/login`, data)
       .then(({ data }) => {
         this.setState({ message: data.message });
-        const token = data.data.token;
-        if (token) {
-          cookie.save("token", token, { path: "/", expires });
-          history.push("/dashboard");
-          // window.location.reload();
+        if (this.state.message === "success") {
+          const token = data.data.token;
+          if (token) {
+            cookie.save("token", token, { path: "/", expires });
+            history.push("/dashboard");
+            // window.location.reload();
+          }
+        } else {
+          swal(`${this.state.message}`, "", "warning")
         }
       })
       .catch(err => console.log(err));
