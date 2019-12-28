@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
-
-// import { Link } from "react-router-dom";
+import swal from "sweetalert";
 
 class CreateQuiz extends Component {
   state = {
@@ -10,46 +9,47 @@ class CreateQuiz extends Component {
     subject: "",
     duration: "",
     questions: [],
-    allQuestions: []
+    allQuestions: [],
+    message: ""
   };
+
   handleSubmit = e => {
     // let { history } = this.props;
     e.preventDefault();
-    let { title, subject, duration } = this.state;
-    // const data = { question, answer, options, marks };
+    let { title, subject, duration, questions } = this.state;
+    const data = { questions, title, subject, duration };
+
     let token = cookie.load("token");
     let auth = {
       headers: {
         "x-auth-token": token
       }
     };
-    // axios
-    //   .post("http://localhost:8000/api/v1/quiz/create-quiz", data, auth)
-    //   .then(({ data }) => {
-    //     this.setState({ message: data.message });
-    //     if (this.state.message === "question created") {
-    //       swal("Question Added", "", "success");
-    //       window.location.reload();
-    //     }
-    //   })
-    //   .catch(err => console.log(err));
+    axios
+      .post("http://localhost:8000/api/v1/quiz/create-quiz", data, auth)
+      .then(({ data }) => {
+        this.setState({ message: data.message });
+        if (this.state.message === "quiz created") {
+          swal("Quiz Created", "", "success");
+          window.location.reload();
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   handleInputs = e => {
-    console.log(e.target.checked);
     this.setState({
       [e.target.name]: e.target.value
     });
-    // console.log(this.state);
 
-    if(e.target.checked && e.target.type === "checkbox") {
+    if (e.target.checked && e.target.type === "checkbox") {
       this.state.questions.push(e.target.value);
     }
 
-    //TODO:
-    // questions if unchecked toh unko array mai se pop krna hai
-    // dashboard pr saare available quiz dekhne ka option + unki api
-    console.log(this.state.questions)
+    if (!e.target.checked && e.target.type === "checkbox") {
+      let index = this.state.questions.indexOf(e.target.value);
+      if (index > -1) this.state.questions.splice(index, 1);
+    }
   };
 
   componentDidMount() {
@@ -64,12 +64,14 @@ class CreateQuiz extends Component {
         "x-auth-token": token
       }
     };
-    axios
-      .get("http://localhost:8000/api/v1/quiz/questions", auth)
-      .then(({ data }) => {
-        this.setState({ allQuestions: data.data.questions });
-      })
-      .catch(err => console.log(err));
+    if (token) {
+      axios
+        .get("http://localhost:8000/api/v1/quiz/questions", auth)
+        .then(({ data }) => {
+          this.setState({ allQuestions: data.data.questions });
+        })
+        .catch(err => console.log(err));
+    }
   }
   render() {
     return (

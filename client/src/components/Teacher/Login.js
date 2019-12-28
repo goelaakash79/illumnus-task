@@ -39,6 +39,15 @@ class Login extends Component {
     });
   };
 
+  componentDidMount() {
+    const { history } = this.props;
+
+    let token = cookie.load("token");
+    if (token) {
+      history.push("/dashboard");
+    }
+  }
+
   render() {
     return (
       <div className="fluid-container">

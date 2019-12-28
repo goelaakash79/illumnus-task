@@ -7,6 +7,15 @@ class Dashboard extends Component {
     cookie.remove("token", { path: "/" });
   };
 
+  componentDidMount() {
+    const { history } = this.props;
+
+    let token = cookie.load("token");
+    if (!token) {
+      history.push("/login");
+    }
+  }
+
   render() {
     return (
       <div className="fluid-container">

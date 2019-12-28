@@ -52,7 +52,7 @@ module.exports.createQuiz = async (req, res) => {
       questions,
       marks
     });
-    let code = `ILLUMNUS-${String(quiz._id).slice(18, 24)}`;
+    let code = String(quiz._id).slice(18, 24);
     quiz.code = code;
     await Quiz.create(quiz);
     return res
@@ -65,8 +65,21 @@ module.exports.createQuiz = async (req, res) => {
   }
 };
 
+module.exports.getQuizzes = async (req, res) => {
+  try {
+    let quizzes = await Quiz.find({});
+    return res
+      .status(200)
+      .json({ message: "success", error: false, data: quizzes });
+  } catch (err) {
+    return res
+      .status(401)
+      .json({ message: err.message, error: true, data: null });
+  }
+};
+
 module.exports.getQuiz = async (req, res) => {
-  let code = `ILLUMNUS-${req.params.code}`;
+  let code = req.params.code;
   try {
     let quiz = await Quiz.findOne(
       { code: code },
@@ -83,10 +96,10 @@ module.exports.getQuiz = async (req, res) => {
       let { marks, title, subject, code, duration } = quiz;
       let questions = await Question.find(
         { _id: { $in: quiz.questions } },
-        { question: 1, options: 1, marks: 1 }
+        { question: 1, options: 1, marks: 1, answer: 1, _id: 1 }
       ); // quiz questions
 
-      quiz = { title, subject, questions, marks, duration };
+      quiz = { title, subject, questions, marks, duration, code };
 
       return res.status(200).json({
         message: "quiz found",
@@ -106,7 +119,7 @@ module.exports.getQuiz = async (req, res) => {
 
 module.exports.startQuiz = async (req, res) => {
   let { name, email } = req.body;
-  let code = `ILLUMNUS-${req.params.code}`;
+  let code = req.params.code;
 
   try {
     let attempt = new Attempt({
@@ -131,7 +144,7 @@ module.exports.startQuiz = async (req, res) => {
 
 module.exports.attemptQuiz = async (req, res) => {
   let { name, email, time_taken, score } = req.body;
-  let code = `ILLUMNUS-${req.params.code}`;
+  let code = req.params.code;
 
   try {
     let attempt = new Attempt({

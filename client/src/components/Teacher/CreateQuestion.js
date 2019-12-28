@@ -14,7 +14,7 @@ class CreateQuestion extends Component {
     option4: "",
     message: ""
   };
-
+  
   componentDidMount() {
     const { history } = this.props;
     let token = cookie.load("token");

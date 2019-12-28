@@ -46,10 +46,13 @@ h1,h2,h3,h4,h5,h6{
 .duration-meter {
   position: fixed;
   top: 48px;
+  /* right: 200px; */
   z-index: 99;
   border: 2px solid #5F2E5B;
   border-radius: 8px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+  font-size: 24px; color: #121212;
+  font-weight: 600;
 }
 
 .question {
