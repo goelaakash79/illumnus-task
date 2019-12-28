@@ -36,21 +36,24 @@ module.exports.login = async (req, res) => {
         return res
           .status(200)
           .header("x-auth-token", token)
-          .json({ message: "success", error: false, data: user });
+          .json({ message: "success", error: false, data: { user, token } });
       } else {
         return res
           .status(200)
-          .json({ message: "invalid credentials", error: true, data: req.body });
+          .json({
+            message: "invalid credentials",
+            error: true,
+            data: req.body
+          });
       }
     } else {
       return res
         .status(200)
         .json({ message: "invalid user", error: true, data: null });
     }
-  }
-  catch(err) {
+  } catch (err) {
     return res
-    .status(400)
-    .json({ message: err.message, error: true, data: null });
+      .status(400)
+      .json({ message: err.message, error: true, data: null });
   }
 };

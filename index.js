@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const morgan = require("morgan");
 const app = express();
 
 require("dotenv").config();
@@ -10,6 +11,7 @@ require("./config/dbconnection");
 
 // configuring middlewares
 app.use(cors());
+app.use(morgan('tiny'));
 app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
