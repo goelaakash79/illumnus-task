@@ -76,14 +76,12 @@ class Dashboard extends Component {
                 <h4 style={{ color: "#ffffff", fontWeight: 500 }}>iQLibrary</h4>
 
                 <p className="mt-2">
-                  Check the list of available quizzes created by experts in the industry and assign the codes to the students.
-                  {/* Track the progress and results of the quizzes attempted by
-                  your students, and analyse their performance. */}
+                  Check the list of available quizzes created by experts in the
+                  industry and assign the codes to the students.
                 </p>
 
                 <Link to="/quizzes" className="mr-2 btn btn-primary">
                   See Quizzes
-                  {/* Check Results */}
                 </Link>
               </div>
             </div>
@@ -96,12 +94,12 @@ class Dashboard extends Component {
                 <h4 style={{ color: "#ffffff", fontWeight: 500 }}>iHelp</h4>
 
                 <p className="mt-2">
-                  Feeling stuck? Contact us at doraemon@nick.com or give us a
-                  call on +91-7781778107
+                  Track the progress and results of the quizzes attempted by
+                  your students, and analyse their performance.
                 </p>
 
-                <Link to="#" className="mr-2 btn btn-primary">
-                  Report a issue
+                <Link to="/attempts" className="mr-2 btn btn-primary">
+                  Check Results
                 </Link>
               </div>
             </div>

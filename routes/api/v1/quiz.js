@@ -9,13 +9,14 @@ const {
   getQuiz,
   startQuiz,
   attemptQuiz,
-  getQuizzes
+  getQuizzes, getAttempts
 } = require("../../../controllers/quiz_controller");
 
 router.post("/add-question", teacherAuth, createQuestion);
 router.get("/questions", teacherAuth, getQuestions);
 router.post("/create-quiz", teacherAuth, createQuiz);
 router.get("/", teacherAuth, getQuizzes);
+router.get("/attempts", teacherAuth, getAttempts);
 
 router.get("/:code", getQuiz);
 router.post("/:code", attemptQuiz);

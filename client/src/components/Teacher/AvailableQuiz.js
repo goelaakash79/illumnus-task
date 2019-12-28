@@ -24,9 +24,9 @@ class AvailableQuiz extends Component {
       axios
         .get(`${baseurl}quiz`, auth)
         .then(({ data }) => {
-        //   console.log(data);
+          //   console.log(data);
           this.setState({ quizzes: data.data });
-          console.log(this.state)
+          // console.log(this.state);
         })
         .catch(err => console.log(err));
     }
@@ -56,17 +56,21 @@ class AvailableQuiz extends Component {
                   return (
                     <tr key={i}>
                       <td>{++i}</td>
-                      <td><span
-                      style={{
-                        fontSize: 16,
-                        padding: 8,
-                        boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
-                        background: "#5F2E5B",
-                        borderRadius: 4,
-                        color: "white",
-                        fontWeight: 500
-                      }}
-                    >{quiz.code}</span></td>
+                      <td>
+                        <span
+                          style={{
+                            fontSize: 16,
+                            padding: 8,
+                            boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                            background: "#5F2E5B",
+                            borderRadius: 4,
+                            color: "white",
+                            fontWeight: 500
+                          }}
+                        >
+                          {quiz.code}
+                        </span>
+                      </td>
                       <td>{quiz.title}</td>
                       <td>{quiz.subject}</td>
                       <td>{quiz.questions.length}</td>

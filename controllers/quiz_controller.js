@@ -165,3 +165,18 @@ module.exports.attemptQuiz = async (req, res) => {
       .json({ message: err.message, error: true, data: null });
   }
 };
+
+module.exports.getAttempts = async (req, res) => {
+  try {
+    let attempts = await Attempt.find({});
+    return res.status(200).json({
+      message: "success",
+      error: false,
+      data: attempts
+    });
+  } catch (err) {
+    return res
+      .status(200)
+      .json({ message: err.message, error: true, data: null });
+  }
+};
