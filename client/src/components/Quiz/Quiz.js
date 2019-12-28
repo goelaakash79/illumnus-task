@@ -1,30 +1,75 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import Timer from "react-compound-timer";
+import axios from "axios";
+// import swal from "sweetalert";
 
 class Quiz extends Component {
   state = {
-    time_taken: null,
-    score: null,
+    time_taken: 0,
+    score: 0,
     name: this.props.location.state.data.name,
     email: this.props.location.state.data.email,
-    code: this.props.location.state.data.quiz.code,
-    marks: 0
+    code: this.props.location.state.data.quiz.code
   };
 
   handleTimeUp = e => {
-    console.log("hi");
-    console.log(this.state.name)
+    let { history } = this.props;
+    let { quiz } = this.props.location.state.data;
+    let { name, email } = this.state;
+
+    this.setState({ time_taken: quiz.duration });
+    let data = this.state;
+    axios
+      .post(`http://localhost:8000/api/v1/quiz/${quiz.code}`, data)
+      .then(({ data }) => {
+        if (data.message === "quiz attempted") {
+          history.push({
+            pathname: "/result",
+            state: { score: this.state.score, code: quiz.code, email, name }
+          });
+          // swal(`Quiz Attempted\nYour Score: ${this.state.score}`, "", "success")
+        }
+      })
+      .catch(err => console.log(err));
   };
 
-  calcScore() {
+  handleSubmit = e => {
+    let { history } = this.props;
 
-  }
+    e.preventDefault();
+    let { quiz } = this.props.location.state.data;
+    let { name, email } = this.state;
+    this.setState({ time_taken: 1 });
+
+    let data = this.state;
+    axios
+      .post(`http://localhost:8000/api/v1/quiz/${quiz.code}`, data)
+      .then(({ data }) => {
+        if (data.message === "quiz attempted") {
+          history.push({
+            pathname: "/result",
+            state: { score: this.state.score, code: quiz.code, email, name }
+          });
+          // swal(`Quiz Attempted\nYour Score: ${this.state.score}`, "", "success")
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
   checkOption = e => {
     let { questions } = this.props.location.state.data.quiz;
-    console.log(e)
-  }
+    let { score } = this.state;
+    questions.forEach(question => {
+      if (
+        question._id === e.target.name &&
+        question.answer === e.target.value
+      ) {
+        score += question.marks;
+        this.setState({ score });
+      }
+    });
+  };
 
   render() {
     let { data } = this.props.location.state;
@@ -76,7 +121,7 @@ class Quiz extends Component {
               <div className="card duration-meter p-4">
                 {/* quiz.duration * 60000 */}
                 <Timer
-                  initialTime={0.08 * 60000}
+                  initialTime={0.2 * 60000}
                   checkpoints={[
                     {
                       time: 0.075 * 60000,
@@ -99,7 +144,11 @@ class Quiz extends Component {
             </div>
           </div>
 
-          <form onSubmit={this.handleSubmit} method="post" className="quiz-section mt-5 mb-5">
+          <form
+            onSubmit={this.handleSubmit}
+            method="post"
+            className="quiz-section mt-5 mb-5"
+          >
             {quiz.questions.map((question, i) => {
               return (
                 <div className="question" key={question._id}>
@@ -120,10 +169,16 @@ class Quiz extends Component {
                       Marks {question.marks}
                     </span>
                   </h5>
-                  {question.options.map(option => {
+                  {question.options.map((option, i) => {
                     return (
                       <div key={option} style={{ color: "black" }}>
-                        <input className="mr-2" onChange={this.checkOption} type="radio" name="option" />
+                        <input
+                          className="mr-2"
+                          onChange={this.checkOption}
+                          type="radio"
+                          value={++i}
+                          name={question._id}
+                        />
                         {option}
                       </div>
                     );

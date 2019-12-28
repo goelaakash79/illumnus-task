@@ -22,7 +22,7 @@ class CandidateForm extends Component {
   render() {
     let { quiz } = this.props.location.state;
     return (
-      <div onLoad={this.getQuizData} className="fluid-container">
+      <div className="fluid-container">
         <div className="container mt-5">
           <h4>illumnus | Quiz Portal Task</h4>
           <hr />

@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import CodeForm from "./components/Quiz/CodeForm";
 import CandidateForm from "./components/Quiz/CandidateForm";
 import Quiz from "./components/Quiz/Quiz";
+import Result from "./components/Quiz/Result";
 
 import Login from "./components/Teacher/Login";
 import Dashboard from "./components/Teacher/Dashboard";
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/enter-quiz-code" component={CodeForm} />
         <Route exact path="/candidate-details" component={CandidateForm} />
         <Route exact path="/quiz" component={Quiz} />
+        <Route exact path="/result" component={Result} />
 
         <Route exact path="/login" component={Login} />
         <Route exact path="/dashboard" component={Dashboard} />

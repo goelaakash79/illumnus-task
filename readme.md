@@ -47,11 +47,11 @@
 
   
 
-- [ ] Step 2
+- [x] Step 2
 
   
 
-- [ ] Step 3
+- [x] Step 3
 
   
   
