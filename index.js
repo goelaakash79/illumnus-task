@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require("morgan");
+const path = require('path');
 const app = express();
 
 require("dotenv").config();
@@ -24,6 +25,11 @@ const Attempt = require("./models/Attempt");
 // Routes
 app.use("/api/v1/users", require("./routes/api/v1/users"));
 app.use("/api/v1/quiz", require("./routes/api/v1/quiz"));
+
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 // intialising the server
 startServer = async () => {

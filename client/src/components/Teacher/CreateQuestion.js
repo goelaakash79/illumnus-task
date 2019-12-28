@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
 import swal from "sweetalert";
+import baseurl from "../../config";
 
 class CreateQuestion extends Component {
   state = {
@@ -44,7 +45,7 @@ class CreateQuestion extends Component {
       }
     };
     axios
-      .post("http://localhost:8000/api/v1/quiz/add-question", data, auth)
+      .post(`${baseurl}quiz/add-question`, data, auth)
       .then(({ data }) => {
         this.setState({ message: data.message });
         if (this.state.message === "question created") {

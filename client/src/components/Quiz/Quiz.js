@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Timer from "react-compound-timer";
 import axios from "axios";
 // import swal from "sweetalert";
+import baseurl from "../../config";
 
 class Quiz extends Component {
   state = {
@@ -21,7 +22,7 @@ class Quiz extends Component {
     this.setState({ time_taken: quiz.duration });
     let data = this.state;
     axios
-      .post(`http://localhost:8000/api/v1/quiz/${quiz.code}`, data)
+      .post(`${baseurl}quiz/${quiz.code}`, data)
       .then(({ data }) => {
         if (data.message === "quiz attempted") {
           history.push({
@@ -44,7 +45,7 @@ class Quiz extends Component {
 
     let data = this.state;
     axios
-      .post(`http://localhost:8000/api/v1/quiz/${quiz.code}`, data)
+      .post(`${baseurl}quiz/${quiz.code}`, data)
       .then(({ data }) => {
         if (data.message === "quiz attempted") {
           history.push({

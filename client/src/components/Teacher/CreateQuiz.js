@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import cookie from "react-cookies";
 import axios from "axios";
 import swal from "sweetalert";
+import baseurl from "../../config";
 
 class CreateQuiz extends Component {
   state = {
@@ -26,7 +27,7 @@ class CreateQuiz extends Component {
       }
     };
     axios
-      .post("http://localhost:8000/api/v1/quiz/create-quiz", data, auth)
+      .post(`${baseurl}quiz/create-quiz`, data, auth)
       .then(({ data }) => {
         this.setState({ message: data.message });
         if (this.state.message === "quiz created") {
@@ -66,7 +67,7 @@ class CreateQuiz extends Component {
     };
     if (token) {
       axios
-        .get("http://localhost:8000/api/v1/quiz/questions", auth)
+        .get(`${baseurl}quiz/questions`, auth)
         .then(({ data }) => {
           this.setState({ allQuestions: data.data.questions });
         })

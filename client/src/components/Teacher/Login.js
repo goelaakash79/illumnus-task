@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import logo from "../../assets/images/logo.png";
 import axios from "axios";
 import cookie from "react-cookies";
+import baseurl from "../../config";
 
 class Login extends Component {
   state = {
@@ -19,7 +20,7 @@ class Login extends Component {
     expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
     let data = { email, password };
     axios
-      .post("http://localhost:8000/api/v1/users/login", data)
+      .post(`${baseurl}users/login`, data)
       .then(({ data }) => {
         this.setState({ message: data.message });
         const token = data.data.token;

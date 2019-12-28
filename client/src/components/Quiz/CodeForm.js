@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 // import { Link } from "react-router-dom";
+import baseurl from "../../config";
 
 class CodeForm extends Component {
   state = {
@@ -14,7 +15,7 @@ class CodeForm extends Component {
     e.preventDefault();
     console.log(this.state);
     axios
-      .get(`http://localhost:8000/api/v1/quiz/${this.state.code}`)
+      .get(`${baseurl}quiz/${this.state.code}`)
       .then(({ data }) => {
         const quiz = data.data.quiz;
         history.push({pathname: "/candidate-details", state: {quiz}})
