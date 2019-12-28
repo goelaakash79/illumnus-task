@@ -44,7 +44,6 @@ class Attempts extends Component {
                   <th>Name</th>
                   <th>Email</th>
                   <th>Quiz Code</th>
-                  <th>Time Taken</th>
                   <th>Score</th>
                 </tr>
               </thead>
@@ -56,7 +55,6 @@ class Attempts extends Component {
                       <td>{attempt.attemptBy.name}</td>
                       <td>{attempt.attemptBy.email}</td>
                       <td>{attempt.code}</td>
-                      <td>{attempt.time_taken}</td>
                       <td>{attempt.score}</td>
                     </tr>
                   );

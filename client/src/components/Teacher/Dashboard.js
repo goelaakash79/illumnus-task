@@ -91,7 +91,7 @@ class Dashboard extends Component {
                 className="about-illumnus jumbotron p-4"
                 style={{ backgroundColor: "#424242" }}
               >
-                <h4 style={{ color: "#ffffff", fontWeight: 500 }}>iHelp</h4>
+                <h4 style={{ color: "#ffffff", fontWeight: 500 }}>iTrack</h4>
 
                 <p className="mt-2">
                   Track the progress and results of the quizzes attempted by
