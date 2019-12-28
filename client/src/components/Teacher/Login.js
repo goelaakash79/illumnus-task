@@ -2,46 +2,49 @@ import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import axios from "axios";
+import cookie from "react-cookies";
 
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    message: ""
+  };
+
+  handleSubmit = e => {
+    const { history } = this.props;
+    e.preventDefault();
+    let { email, password } = this.state;
+    const expires = new Date();
+    expires.setDate(Date.now() + 1000 * 60 * 60 * 24 * 14);
+    let data = { email, password };
+    axios
+      .post("http://localhost:8000/api/v1/users/login", data)
+      .then(({ data }) => {
+        this.setState({ message: data.message });
+        const token = data.data.token;
+        if (token) {
+          cookie.save("token", token, { path: "/", expires });
+          history.push("/dashboard");
+          // window.location.reload();
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  handleChange = e => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   render() {
-    const handleSubmit = e => {
-      e.preventDefault();
-      let data = this.state;
-      // console.log(data);
-      axios
-        .post("http://localhost:8000/api/v1/users/login", data)
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
-    };
-
-    const handleChange = e => {
-      let email, password;
-      if (e.target.name === "email") {
-        email = e.target.value;
-        this.setState({
-          email
-        });
-      }
-      if (e.target.name === "password") {
-        password = e.target.value;
-        this.setState({
-          password
-        });
-      }
-      // console.log(this.state);
-    };
-
     return (
       <div className="fluid-container">
         <div className="container pt-5" style={{ marginTop: 102 }}>
           <div
-            className="card p-5 col-md-5 mt-5"
+            className="card p-5 col-12 col-md-5 mt-5"
             style={{
               margin: "0 auto",
               border: 0,
@@ -53,21 +56,23 @@ class Login extends Component {
               <img width="100" alt="illumnus-logo" src={logo} /> | Teacher Login
             </h5>
             <div className="mt-4">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={this.handleSubmit}>
                 <input
                   placeholder="Enter your email address"
                   className="form-control mb-3"
-                  onChange={handleChange}
+                  onChange={this.handleChange}
                   name="email"
+                  // value={this.state.email}
                   type="email"
                   required
                 />
                 <input
                   placeholder="Enter your password"
                   className="form-control mb-3"
-                  onChange={handleChange}
+                  onChange={this.handleChange}
                   name="password"
                   type="password"
+                  // value={this.state.password}
                   required
                 />
                 <button
